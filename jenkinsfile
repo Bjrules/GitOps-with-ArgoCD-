@@ -44,7 +44,7 @@ parameters{
          stage('SonarQube Analysis'){
             steps {
                 // kindly remove credentialID as parameter in withSonarQubeEnv
-               withSonarQubeEnv(credentialsId: 'Sonar-Server') {
+               withSonarQubeEnv('Sonar-Server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -Dsonar.projectKey=bankapp \
 -Dsonar.java.binaries=target '''
                 }
