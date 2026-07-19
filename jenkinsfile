@@ -10,6 +10,13 @@ SCANNER_HOME = tool 'sonar-scanner'
 }
 
     stages{
+
+                // Stage to clean the workspace
+        stage('Clean Workspace') {
+            steps {
+                    cleanWs() // Clean up previous files
+                }
+        }
         stage('Git Checkout'){
             steps {
                 git branch: 'source-code-for-ci', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/GitOps-with-ArgoCD-.git'
@@ -18,12 +25,12 @@ SCANNER_HOME = tool 'sonar-scanner'
 
         stage('compile'){
             steps {
-                sh : "mvn compile"
+                sh "mvn compile"
             }
         }
         stage('test'){
             steps {
-                sh : "mvn test -DskipTest=true" // This enable jenkins to skip this testing stage
+                sh "mvn test -DskipTest=true" // This enable jenkins to skip this testing stage
             }
         }
 
