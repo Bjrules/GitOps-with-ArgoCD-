@@ -1,18 +1,44 @@
 pipeline{
     agent any
 
+    tools {
+        maven 'maven3'
+    }
+    // Define environment variables, like the SonarQube scanner home
+environment {
+SCANNER_HOME = tool 'sonar-scanner'
+}
+
     stages{
-        stage('Git Checkout')
-        {
+        stage('Git Checkout'){
             steps {
-                echo 'Hello world'
+                git branch: 'source-code-for-ci', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/GitOps-with-ArgoCD-.git'
             }
         }
 
-stage('HMvn Test')
-        {
+        stage('compile'){
             steps {
-                echo 'Hello world'
+                sh : "mvn compile"
+            }
+        }
+        stage('test'){
+            steps {
+                sh : "mvn test -DskipTest=true" // This enable jenkins to skip this testing stage
+            }
+        }
+
+        stage('File System Scan'){
+            steps {
+              sh "trivy fs --format table -o fs.html ." // Scan filesystem and save report as HTML
+            }
+        }
+         stage('compile'){
+            steps {
+               withSonarQubeEnv(credentialsId: 'sonar-token') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -
+Dsonar.projectKey=bankapp \
+-Dsonar.java.binaries=target '''
+}
             }
         }
 
