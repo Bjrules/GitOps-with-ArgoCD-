@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Git Cheout')
+        {
+            steps {
+                echo 'Hello world'
+            }
+        }
+
+stage('HMvn Test')
+        {
+            steps {
+                echo 'Hello world'
+            }
+        }
+
+
+
+
+    }
+}
