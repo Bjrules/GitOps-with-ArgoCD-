@@ -11,7 +11,7 @@ metadata:
   namespace: webapps
 ```
 
-### Create Role 
+### Create Role.
 
 
 ```yaml
