@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     stages{
-        stage('Git Cheout')
+        stage('Git Checkout')
         {
             steps {
                 echo 'Hello world'
@@ -15,7 +15,6 @@ stage('HMvn Test')
                 echo 'Hello world'
             }
         }
-
 
 
 
