@@ -69,7 +69,7 @@ parameters{
             }
         }
 
-        stage('File System Scan'){
+        stage('Docker Image Scan'){
             steps {
               sh "trivy image --format table -o dimage.html bjrules/bankapp:${params.DOCKER_TAG} " // Scan filesystem and save report as HTML
             }
