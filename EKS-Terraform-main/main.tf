@@ -13,7 +13,7 @@ resource "aws_vpc" "bj_vpc" {
 resource "aws_subnet" "bj_subnet" {
   count = 2
   vpc_id                  = aws_vpc.bj_vpc.id
-  cidr_block              = cidrsubnet(aws_vpc.devopsshack_vpc.cidr_block, 8, count.index)
+  cidr_block              = cidrsubnet(aws_vpc.bj_vpc.cidr_block, 8, count.index)
   availability_zone       = element(["us-east-1a", "us-east-1b"], count.index)
   map_public_ip_on_launch = true
 
@@ -87,7 +87,7 @@ resource "aws_security_group" "bj_node_sg" {
 }
 
 resource "aws_eks_cluster" "bj" {
-  name     = "devopsshack-cluster"
+  name     = "bj-cluster"
   role_arn = aws_iam_role.bj_cluster_role.arn
 
   vpc_config {
@@ -117,7 +117,7 @@ resource "aws_eks_node_group" "bj" {
 }
 
 resource "aws_iam_role" "bj_cluster_role" {
-  name = "devopsshack-cluster-role"
+  name = "bj-cluster-role"
 
   assume_role_policy = <<EOF
 {
