@@ -63,7 +63,7 @@ parameters{
             steps {
                 script{
                withDockerRegistry(credentialsId: 'Docker-Login') {
-                sh "docker build -t bjrules/bankapp:${params.DOCKER_TAG} ."
+                sh "docker build -t bjrules/bankapp:${params.DOCKER_TAG} . "
                }
         }
             }
