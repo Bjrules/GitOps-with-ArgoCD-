@@ -73,7 +73,7 @@ subjects:
   kind: ServiceAccount
   name: jenkins 
 ```
-### Create Cluster role & bind to Service Account
+### Create Cluster role & bind to Service Account.
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
