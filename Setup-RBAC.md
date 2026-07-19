@@ -1,6 +1,6 @@
 ## Create Service Account, Role & Assign that role, And create a secret for Service Account and geenrate a Token
 
-### Creating Service Account
+### Creating Service Account.
 
 
 ```yaml
