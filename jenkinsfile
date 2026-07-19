@@ -48,6 +48,12 @@ SCANNER_HOME = tool 'sonar-scanner'
                 }
             }
         }
+
+         stage('Build and Publish to Nexus'){
+            steps {
+                sh "mvn compile"
+            }
+        }
             
         
 
