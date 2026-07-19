@@ -55,7 +55,7 @@ rules:
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ```
 
-### Bind the role to service account
+### Bind the role to service account.
 
 
 ```yaml
