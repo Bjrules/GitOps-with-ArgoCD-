@@ -61,8 +61,10 @@ parameters{
 
         stage('Docker Build and Tag'){
             steps {
+                script{
                withDockerRegistry(credentialsId: 'Docker-Login') {
                 sh "docker build -t bjrules/bankapp:${params.DOCKER_TAG} ."
+               }
         }
             }
         }
@@ -75,8 +77,10 @@ parameters{
             
         stage('Docker Push'){
             steps {
+                script{
                withDockerRegistry(credentialsId: 'Docker-Login') {
                 sh "docker push bjrules/bankapp:${params.DOCKER_TAG} ."
+               }
         }
             }
         }
