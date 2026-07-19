@@ -51,13 +51,13 @@ parameters{
             }
         }
 
-         stage('Build and Publish to Nexus'){
-            steps {
-                withMaven(globalMavenSettingsConfig: 'Banjo-maven-Settings', maven: 'maven3', traceability: true) {
-                     sh "mvn deploy"
-}
-            }
-        }
+//          stage('Build and Publish to Nexus'){
+//             steps {
+//                 withMaven(globalMavenSettingsConfig: 'Banjo-maven-Settings', maven: 'maven3', traceability: true) {
+//                      sh "mvn deploy"
+// }
+//             }
+//         }
 
         stage('Docker Build and Tag'){
             steps {
