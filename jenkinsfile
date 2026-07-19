@@ -42,7 +42,7 @@ SCANNER_HOME = tool 'sonar-scanner'
          stage('SonarQube Analysis'){
             steps {
                 
-               withSonarQubeEnv('sonar-token') {
+               withSonarQubeEnv('sonar-Server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -Dsonar.projectKey=bankapp \
 -Dsonar.java.binaries=target '''
                 }
