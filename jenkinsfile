@@ -41,7 +41,7 @@ SCANNER_HOME = tool 'sonar-scanner'
         }
          stage('SonarQube Analysis'){
             steps {
-                
+                // kindly remove credentialID
                withSonarQubeEnv('Sonar-Server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -Dsonar.projectKey=bankapp \
 -Dsonar.java.binaries=target '''
