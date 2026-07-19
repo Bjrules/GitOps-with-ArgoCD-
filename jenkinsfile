@@ -30,7 +30,7 @@ SCANNER_HOME = tool 'sonar-scanner'
         }
         stage('test'){
             steps {
-                sh "mvn test -DskipTest=true" // This enable jenkins to skip this testing stage
+                sh "mvn test" // This enable jenkins to skip this testing stage
             }
         }
 
