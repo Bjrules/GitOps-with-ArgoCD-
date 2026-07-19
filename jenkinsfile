@@ -21,7 +21,7 @@ parameters{
         }
         stage('Git Checkout'){
             steps {
-                git branch: 'source-code-for-ci', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/GitOps-with-ArgoCD-.git'
+                git branch: 'main', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/Multi-Tier-BankApp-CI-main.git'
             }
         }
 
