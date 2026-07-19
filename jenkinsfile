@@ -39,7 +39,7 @@ SCANNER_HOME = tool 'sonar-scanner'
               sh "trivy fs --format table -o fs.html ." // Scan filesystem and save report as HTML
             }
         }
-         stage('compile'){
+         stage('SonarQube Analysis'){
             steps {
                withSonarQubeEnv(credentialsId: 'sonar-token') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -
