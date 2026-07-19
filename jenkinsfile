@@ -4,11 +4,13 @@ pipeline{
     tools {
         maven 'maven3'
     }
-    // Define environment variables, like the SonarQube scanner home
+    // Define environment variables, 
 environment {
 SCANNER_HOME = tool 'sonar-scanner'
 }
-
+parameters{
+    string(name: 'DOCKER_TAG', defaultValue:'latest', description: 'Docker tag')
+}
     stages{
 
                 // Stage to clean the workspace
@@ -41,8 +43,8 @@ SCANNER_HOME = tool 'sonar-scanner'
         }
          stage('SonarQube Analysis'){
             steps {
-                // kindly remove credentialID
-               withSonarQubeEnv('Sonar-Server') {
+                // kindly remove credentialID as parameter in withSonarQubeEnv
+               withSonarQubeEnv(credentialsId: 'Sonar-Server') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -Dsonar.projectKey=bankapp \
 -Dsonar.java.binaries=target '''
                 }
@@ -51,12 +53,33 @@ SCANNER_HOME = tool 'sonar-scanner'
 
          stage('Build and Publish to Nexus'){
             steps {
-                sh "mvn compile"
+                withMaven(globalMavenSettingsConfig: 'Banjo-maven-Settings', maven: 'maven3', traceability: true) {
+                     sh "mvn deploy"
+}
+            }
+        }
+
+        stage('Docker Build and Tag'){
+            steps {
+               withDockerRegistry(credentialsId: 'Docker-Login') {
+                sh "docker build -t bjrules/bankapp:${params.DOCKER_TAG} ."
+        }
+            }
+        }
+
+        stage('File System Scan'){
+            steps {
+              sh "trivy image --format table -o dimage.html bjrules/bankapp:${params.DOCKER_TAG} " // Scan filesystem and save report as HTML
             }
         }
             
-        
-
+        stage('Docker Push'){
+            steps {
+               withDockerRegistry(credentialsId: 'Docker-Login') {
+                sh "docker push bjrules/bankapp:${params.DOCKER_TAG} ."
+        }
+            }
+        }
 
 
     }
