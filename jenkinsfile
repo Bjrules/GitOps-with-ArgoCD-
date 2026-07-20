@@ -23,7 +23,7 @@ parameters{
         }
         stage('Git Checkout'){
             steps {
-                git branch: 'source-code-for-ci', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/GitOps-with-ArgoCD-.git'
+                git branch: 'CI-main', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/GitOps-with-ArgoCD-.git'
             }
         }
 
