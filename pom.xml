@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -83,11 +84,11 @@
 		<distributionManagement>
         <repository>
             <id>maven-releases</id>
-            <url>http://44.198.57.211:8081/repository/maven-releases/</url>
+            <url>http://54.144.202.240:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>maven-snapshots</id>
-            <url>http://44.198.57.211:8081/repository/maven-snapshots/</url>
+            <url>http://54.144.202.240:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
