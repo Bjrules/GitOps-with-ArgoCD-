@@ -2,18 +2,20 @@ pipeline{
     agent any
 
     tools {
-        maven 'maven3'
+        //jdk 'jdk17'   // name must match what you configured in Manage Jenkins → Tools
+        maven 'maven3' // name must match what you configured in Manage Jenkins → Tools
     }
     // Define environment variables, 
 environment {
 SCANNER_HOME = tool 'sonar-scanner'
+JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+PATH = "${JAVA_HOME}/bin:${env.PATH}"
 }
 parameters{
     string(name: 'DOCKER_TAG', defaultValue:'latest', description: 'Docker tag')
 }
     stages{
-
-                // Stage to clean the workspace
+             // Stage to clean the workspace
         stage('Clean Workspace') {
             steps {
                     cleanWs() // Clean up previous files
@@ -21,20 +23,20 @@ parameters{
         }
         stage('Git Checkout'){
             steps {
-                git branch: 'main', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/Multi-Tier-BankApp-CI-main.git'
+                git branch: 'source-code-forci', credentialsId: 'github-cred', url: 'https://github.com/Bjrules/GitOps-with-ArgoCD-.git'
             }
         }
 
-        // stage('compile'){
-        //     steps {
-        //         sh "mvn compile"
-        //     }
-        // }
-        // stage('test'){
-        //     steps {
-        //         sh "mvn test -DskipTests=true" // This enable jenkins to skip this testing stage
-        //     }
-        // }
+        stage('compile'){
+            steps {
+                sh "mvn compile"
+            }
+        }
+        stage('test'){
+            steps {
+                sh "mvn test -DskipTests=true" // This enable jenkins to skip this testing stage
+            }
+        }
 
         stage('File System Scan'){
             steps {
@@ -51,13 +53,15 @@ parameters{
             }
         }
 
-//          stage('Build and Publish to Nexus'){
-//             steps {
-//                 withMaven(globalMavenSettingsConfig: 'Banjo-maven-Settings', maven: 'maven3', traceability: true) {
-//                      sh "mvn deploy"
-// }
-//             }
-//         }
+         stage('Build and Publish to Nexus'){
+            steps {
+            withMaven(globalMavenSettingsConfig: 'Banjo-maven-Settings', jdk:'jdk17', maven: 'maven3', traceability: true) {
+                
+                //sh 'mvn clean package -DskipTests'
+               sh "mvn deploy -DskipTests=true"
+               }
+            }
+        }
 
         stage('Docker Build and Tag'){
             steps {
@@ -69,17 +73,17 @@ parameters{
             }
         }
 
-        stage('Docker Image Scan'){
-            steps {
-              sh "trivy image --format table -o dimage.html bjrules/bankapp:${params.DOCKER_TAG} " // Scan filesystem and save report as HTML
-            }
-        }
+        // stage('Docker Image Scan'){
+        //     steps {
+        //       sh "trivy image --format table -o dimage.html bjrules/bankapp:${params.DOCKER_TAG} " // Scan Docker Image and save report as HTML
+        //     }
+        // }
             
         stage('Docker Push'){
             steps {
                 script{
                withDockerRegistry(credentialsId: 'Docker-Login') {
-                sh "docker push bjrules/bankapp:${params.DOCKER_TAG} ."
+                sh "docker push bjrules/bankapp:${params.DOCKER_TAG}"
                }
         }
             }
