@@ -41,15 +41,15 @@ parameters{
               sh "trivy fs --format table -o fs.html ." // Scan filesystem and save report as HTML
             }
         }
-         stage('SonarQube Analysis'){
-            steps {
-                // kindly remove credentialID as parameter in withSonarQubeEnv
-               withSonarQubeEnv('Sonar-Server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -Dsonar.projectKey=bankapp \
--Dsonar.java.binaries=target '''
-                }
-            }
-        }
+//          stage('SonarQube Analysis'){
+//             steps {
+//                 // kindly remove credentialID as parameter in withSonarQubeEnv
+//                withSonarQubeEnv('Sonar-Server') {
+//                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=bankapp -Dsonar.projectKey=bankapp \
+// -Dsonar.java.binaries=target '''
+//                 }
+//             }
+//         }
 
 //          stage('Build and Publish to Nexus'){
 //             steps {
