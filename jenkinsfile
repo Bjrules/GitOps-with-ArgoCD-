@@ -25,16 +25,16 @@ parameters{
             }
         }
 
-        stage('compile'){
-            steps {
-                sh "mvn compile"
-            }
-        }
-        stage('test'){
-            steps {
-                sh "mvn test -DskipTests=true" // This enable jenkins to skip this testing stage
-            }
-        }
+        // stage('compile'){
+        //     steps {
+        //         sh "mvn compile"
+        //     }
+        // }
+        // stage('test'){
+        //     steps {
+        //         sh "mvn test -DskipTests=true" // This enable jenkins to skip this testing stage
+        //     }
+        // }
 
         stage('File System Scan'){
             steps {
