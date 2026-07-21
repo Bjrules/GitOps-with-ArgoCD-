@@ -41,3 +41,15 @@ sudo systemctl status jenkins
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_131004.png)
 ---
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_135531.png)
+Configure Credentials for Docker login, Github Login and Sonarqube server integration in Jenkins
+![alt text](IMG-SCREENSHOTS/Screenshot_20260719_142129.png)
+Configure Sonarqube Server URL with the security token in Jenkin
+![alt text](IMG-SCREENSHOTS/Screenshot_20260719_142345.png)
+![alt text](IMG-SCREENSHOTS/Screenshot_20260719_142604.png)
+#### Also go to Manage jenkins>Tools to configure `sonar-scanner` for jenkiins (Screenshots not Available)
+> SonarQube server showing the Analysis of the Bankapp
+![alt text](IMG-SCREENSHOTS/Screenshot_20260719_155343.png)
+---
+Config File Management for Nexus Configurations  so as to modify the credentials of the `maven-releases` and `maven-snapshots` with the username and passwords accordingly
+![alt text](IMG-SCREENSHOTS/Screenshot_20260719_163016.png)
+Also The pom.xml file in the `CI-main` branch of this repo need to be updated with the url of the Nexus server while pointing to maven-releases `http://54.234.21.34:8080/repository/maven-releases` and `http://54.234.21.34:8080/repository/maven-snapshot`  
