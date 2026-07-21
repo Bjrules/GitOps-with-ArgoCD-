@@ -6,7 +6,7 @@ kind: Deployment
 metadata:
   name: bankapp
 spec:
-  replicas: 4
+  replicas: 3
   revisionHistoryLimit: 1
   selector:
     matchLabels:
