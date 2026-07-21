@@ -36,20 +36,84 @@ sudo apt install jenkins -y
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
 sudo systemctl status jenkins
+
 ```
+
+
+**DOCKER INSTALLATION**
+```
+
+# Remove any conflicting old packages first
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl -y
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo docker run hello-world
+```
+
+
+
+Install Docker on Jenkins, SonarQube and Nexus Servers as We will be building and pushing docker images from jenkins Server While SonarQube and Nexus will be run as Docker container from Docker images on their respective machines. 
+
+**ON JENKINS SERVER**
+- After installation of Docker
+- `sudo usermod -aG docker $USER`
+- `sudo usermod -aG jenkins` So thats jenkins as a user service account can run Docker
+- `newgrp docker`
+
+**ON SONARQUBE SERVER**
+- After installation of Docker
+- `sudo usermod -aG docker $USER`
+- `newgrp docker`
+- `docker run -d --name sonarqube -p 9000:9000 sonarqube:lts-community`
+- The head up to browser `http://<Public-IP-Address>/9000` to configure
+
+**ON NEXUS SERVER**
+- After installation of Docker
+- `sudo usermod -aG docker $USER`
+- `newgrp docker`
+- `docker run -d --name nexus -p 8081:8081 sonatype/nexus3`
+- The head up to browser `http://<Public-IP-Address>/8081` to configure
+
+
+
+
 > Install Jenkins plugins
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_131004.png)
 ---
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_135531.png)
 Configure Credentials for Docker login, Github Login and Sonarqube server integration in Jenkins
+![alt text](IMG-SCREENSHOTS/Screenshot_20260720_173207.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_142129.png)
 Configure Sonarqube Server URL with the security token in Jenkin
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_142345.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_142604.png)
-#### Also go to Manage jenkins>Tools to configure `sonar-scanner` for jenkiins (Screenshots not Available)
+![alt text](IMG-SCREENSHOTS/Screenshot_20260721_013401.png)
+![alt text](IMG-SCREENSHOTS/Screenshot_20260721_013416.png)
+ Also go to Manage jenkins>Tools to configure `sonar-scanner` for jenkins 
+ ![alt text](IMG-SCREENSHOTS/Screenshot_20260720_171601.png)
+
 > SonarQube server showing the Analysis of the Bankapp
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_155343.png)
 ---
+
+### Setup Nexus Artifact Server
+
+![alt text](IMG-SCREENSHOTS/Screenshot_20260720_210359.png)
 Config File Management for Nexus Configurations  so as to modify the credentials of the `maven-releases` and `maven-snapshots` with the username and passwords accordingly
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260719_163016.png)
 Also The pom.xml file in the `CI-main` branch of this repo need to be updated with the url of the Nexus server while pointing to maven-releases `http://54.234.21.34:8080/repository/maven-releases` and `http://54.234.21.34:8080/repository/maven-snapshot`  
