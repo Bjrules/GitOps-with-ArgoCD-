@@ -89,6 +89,45 @@ parameters{
             }
         }
 
+        // Update the image tag in the YAML manifest in another repository
+        stage('Update YAML Manifest in Other Repo'){
+              steps {
+                script {
+                    withCredentials([gitUsernamePassword(credentialsId: 'github-cred', gitToolName: 'Default')]) {
+                        sh '''
+            # Clone the repo containing the Kubernetes deployment manifest
+            git clone -b CI-main https://github.com/Bjrules/GitOps-with-ArgoCD-.git
+            cd GitOps-with-ArgoCD-
+            # Check if the bankapp-ds.yml file exists
+            ls -l bankapp
+            # Update the Docker image tag in the YAML file
+            sed -i 's|image: bjrules/bankapp:.*|image: bjrules/bankapp:'${DOCKER_TAG}'|'
+            $(pwd)/bankapp/bankapp-ds.yml
+            '''
+            // Confirm the change in the updated YAML file
+            sh '''
+            echo "Updated YAML file contents:"
+            cat GitOps-with-ArgoCD-/bankapp/bankapp-ds.yml
+            '''
+            // Configure Git for the commit
+            sh '''
+            cd GitOps-with-ArgoCD-
+            git config user.email "rulesxx@gmail.com"
+            git config user.name "Bjrules"
+            '''
+            // Commit and push the changes back to the repository
+            sh '''
+            cd GitOps-with-ArgoCD-
+            git add bankapp/bankapp-ds.yml
+            git commit -m "Update image tag to ${DOCKER_TAG}"
+            git push origin main
+            '''
+            }
+        }
+    }
+    
+}
+
 
     }
 }
