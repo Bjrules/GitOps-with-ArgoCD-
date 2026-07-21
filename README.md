@@ -9,6 +9,7 @@ Implementing GitOps Practices using ArgoCD
  Note: Current release of Jenkins now works on jdk21 but since I am deploying a java SpringBoot application that works on jdk17, I had to install the both of them, but if I do ` sudo update-alternatives --config java` and select jdk17, jenkins Server then crashes almost irrevokably. so the option is to set jdk 17 `JAVA_HOME` and `PATH` in the `environment` section of the pipeline see screenshot below. 
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_170958.png)
 
+**Please Study the jenkinsfile in this Repository*
 
 ## Project Steps.
 Set Up the Following EC2 of t2.medium each
