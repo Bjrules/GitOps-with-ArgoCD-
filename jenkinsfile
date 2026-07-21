@@ -100,9 +100,8 @@ parameters{
             cd GitOps-with-ArgoCD-
             # Check if the bankapp-ds.yml file exists
             ls -l bankapp
-            repo_dir=$(pwd)
             # Update the Docker image tag in the YAML file
-            sed -i 's|image: bjrules/bankapp:.*|image: bjrules/bankapp:'${DOCKER_TAG}'|'$(repo_dir)/bankapp/bankapp-ds.yml
+            sed -i 's|image: bjrules/bankapp:.*|image: bjrules/bankapp:'${DOCKER_TAG}'|'$(pwd)/bankapp/bankapp-ds.yml
             '''
             // Confirm the change in the updated YAML file
             sh '''
