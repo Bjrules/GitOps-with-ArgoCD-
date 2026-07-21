@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: bankapp
-        image: bjrules/bankapp:argo-GitOps
+        image: bjrules/bankapp:argo-cd-prj
         ports:
         - containerPort: 8080
         env:
