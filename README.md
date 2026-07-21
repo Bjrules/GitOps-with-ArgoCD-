@@ -175,7 +175,8 @@ Verify the ArgoCD Installation:
 
 Since ArgoCD's server is ClusterIP by default, I need to change the  service: type: LoadBalancer thus:
 
-`kubectl edit svc argocd-server -n argocd`
+```kubectl edit svc argocd-server -n argocd
+```
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_042739.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_042814.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_042858.png)
