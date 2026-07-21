@@ -227,7 +227,7 @@ Proctove Measure incase to aid AutoSync incase of server freeze, i ha dto config
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_052746.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_053156.png)
 
-a Screenshot of my Workspace in Jenkins.
+A Screenshot of my Workspace in Jenkins.
 
 # THANK YOU.
 
