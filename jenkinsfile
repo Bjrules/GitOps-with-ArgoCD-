@@ -96,7 +96,7 @@ parameters{
                     withCredentials([gitUsernamePassword(credentialsId: 'github-cred', gitToolName: 'Default')]) {
                         sh '''
             # Clone the repo containing the Kubernetes deployment manifest
-            git clone -b CI-main https://github.com/Bjrules/GitOps-with-ArgoCD-.git
+            git clone -b CD-GitOps https://github.com/Bjrules/GitOps-with-ArgoCD-.git
             cd GitOps-with-ArgoCD-
             # Check if the bankapp-ds.yml file exists
             ls -l bankapp
