@@ -58,6 +58,7 @@ parameters{
             withMaven(globalMavenSettingsConfig: 'Banjo-maven-Settings', jdk:'jdk17', maven: 'maven3', traceability: true) {
                 
                 //sh 'mvn clean package -DskipTests'
+                // 'mvn deploy -DskipTests=true' skips test because there is a known bug already in the source code
                sh "mvn deploy -DskipTests=true"
                }
             }
