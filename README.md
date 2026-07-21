@@ -196,6 +196,7 @@ while the username is `admin` Get the Password using:
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_043439.png)
 
 Configure ArgoD to connect to my Connect to CD-GitOps branch of my Repo (Single point of truth)
+
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_044942.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_045913.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_050157.png)
@@ -207,18 +208,22 @@ Configure ArgoD to connect to my Connect to CD-GitOps branch of my Repo (Single 
 
 Yipee.... It works !!!!! Fully Automated.............
 > The interface on my Java SpringBoot Bank Application
+
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_051434.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_051450.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_051540.png)
 
 Lets Modify to see if it will work.
+
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_051949.png)
 
 It Works! synced having configured auto-sync....
+
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_052016.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_052630.png)
 
 Proctove Measure incase to aid AutoSync incase of server freeze, i ha dto configure webhook in Github as well.
+
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_052746.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_053156.png)
 
