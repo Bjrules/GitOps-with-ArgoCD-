@@ -120,7 +120,7 @@ parameters{
             ls
             git add bankapp/bankapp-ds.yml
             git commit -m "Update image tag to ${DOCKER_TAG}"
-            git push origin main
+            git push
             '''
             }
         }
