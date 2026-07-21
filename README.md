@@ -16,7 +16,7 @@ Set Up the Following EC2 of t2.medium each
 3. SonarQube Server (for SAST)
 4. Nexus (for Artifact Storage and versioning)
 
-### Install and Configure JENKINS
+### JENKINS INSTALLATION
 
 ```
 sudo apt update
