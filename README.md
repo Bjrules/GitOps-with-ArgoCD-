@@ -188,8 +188,10 @@ Then
 hit the browser with the public DNS IP or ADDRESS
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_043149.png)
 
-while the username is `admin` Get the Password using
+while the username is `admin` Get the Password using:
+
 `kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d`
+
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_043459.png)
 ![alt text](IMG-SCREENSHOTS/Screenshot_20260721_043439.png)
 
